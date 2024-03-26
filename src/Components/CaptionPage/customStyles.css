@@ -1,0 +1,29 @@
+.content {
+    top: '50%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    marginRight: '-50%';
+    transform: 'translate(-50%, -50%)';
+    display: 'flex';
+    alignItems: 'center';
+    justifyContent: 'center';
+    flexDirection: 'column'
+  }
+  .image {
+    marginRight: '20px';
+  }
+  /* inputContainer: {
+    display: 'flex',
+    flexDirection: 'column', // Align input boxes in a column
+    marginLeft: '20px', // Add margin for better separation from the image
+  }
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row', // Align buttons in a row
+    marginTop: '20px', // Add margin between input boxes and buttons
+  }
+  buttonStyle:{
+    marginRight:'10px',
+    borderRadius: '5px',
+  } */

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import MemeCard from "./MemeCard/MemeCard";
-import CaptionPage from "./CaptionPage/CaptionPage";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const Body = () => {
   const [memes, setMemes] = useState([]);
@@ -33,7 +32,7 @@ const Body = () => {
           ))}
         </div>
       </div>
-      <Route path="/caption/:id" component={CaptionPage} />
+      {/* <Route path="/caption/:id" component={CaptionPage} /> */}
     </Router>
   );
 };
