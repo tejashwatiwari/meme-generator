@@ -1,0 +1,31 @@
+/* CommunityMemes.css */
+.community-meme {
+    width: 350px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Adding transition for smooth hover effect */
+  }
+  
+  .community-meme:hover {
+    transform: translateY(-5px); /* Move the card up by 5px on hover */
+  }
+  
+  .community-meme img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .memes-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  
+  /* Set black background for the Community Page */
+  body {
+    background-color: white;
+  }
+  

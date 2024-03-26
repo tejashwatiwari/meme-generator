@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CaptionPage from '../CaptionPage/CaptionPage';
+import './MemeCard.css'
 
 const MemeCard = ({ meme, onSelectMeme }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
