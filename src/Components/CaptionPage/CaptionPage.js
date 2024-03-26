@@ -34,7 +34,7 @@ const customStyles = {
   }
 };
 
-const CaptionPage = ({ meme, closeModal }) => {
+const CaptionPage = ({ meme, setMeme, closeModal }) => {
   const [inputText, setInputText] = useState(Array(meme.box_count).fill(''));
   
   const generateMeme = async () => {
@@ -43,29 +43,31 @@ const CaptionPage = ({ meme, closeModal }) => {
     const password = 'WhatAMeme@123'; // Replace with your Imgflip password
 
     let url = `https://api.imgflip.com/caption_image?template_id=${templateId}&username=${username}&password=${password}`;
-    inputText.forEach((text, index) => {
-      url += `&text${index}=${encodeURIComponent(text)}`;
+  
+  // Construct the URL for each text box
+  inputText.forEach((text, index) => {
+    url += `&boxes[${index}][text]=${encodeURIComponent(text)}`;
+  });
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST'
     });
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST'
-      });
+    const data = await response.json();
 
-      const data = await response.json();
-
-      if (data.success) {
-        console.log('Meme generated successfully:', data.data.url);
-        // You can handle the generated meme URL here, for example, display it to the user or download it.
-      } else {
-        console.error('Error generating meme:', data.error_message);
-        // Handle error response
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle network or other errors
+    if (data.success) {
+      console.log('Meme generated successfully:', data.data.url);
+      setMeme({ ...meme, url: data.data.url }); // Update the default image with the generated one
+    } else {
+      console.error('Error generating meme:', data.error_message);
+      // Handle error response
     }
-  };
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle network or other errors
+  }
+  }
 
   const handleInputChange = (index, value) => {
     const newText = [...inputText];
@@ -83,6 +85,19 @@ const CaptionPage = ({ meme, closeModal }) => {
       onChange={(e) => handleInputChange(index, e.target.value)}
     />
   ));
+
+  const downloadImage = async () => {
+    const image = await fetch(meme.url);
+    const imageBlob = await image.blob();
+    const imageUrl = URL.createObjectURL(imageBlob);
+
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = 'generated_meme.png'; // You can adjust the filename here
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <Modal
@@ -103,7 +118,7 @@ const CaptionPage = ({ meme, closeModal }) => {
       </div>
       <div style={customStyles.buttonContainer}>
         <button style={customStyles.buttonStyle} onClick={generateMeme}>Generate Meme</button>
-        <button style={customStyles.buttonStyle}>Download Meme</button>
+        <button style={customStyles.buttonStyle} onClick={downloadImage}>Download Meme</button>
         <button onClick={closeModal}>Close</button>
       </div>
     </Modal>

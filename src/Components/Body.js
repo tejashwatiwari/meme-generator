@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import MemeCard from "./MemeCard/MemeCard";
+import CaptionPage from './CaptionPage/CaptionPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const Body = () => {
   const [memes, setMemes] = useState([]);
+  const [selectedMeme, setSelectedMeme] = useState(null);
 
   useEffect(() => {
     const fetchMemes = async () => {
@@ -28,11 +30,11 @@ const Body = () => {
         <h1>Pick Your Meme Template</h1>
         <div className="memes-container">
           {memes.map((meme) => (
-            <MemeCard key={meme.id} meme={meme} />
+            <MemeCard key={meme.id} meme={meme} onSelectMeme={setSelectedMeme} />
           ))}
         </div>
+        {selectedMeme && <CaptionPage meme={selectedMeme} setMeme={setSelectedMeme} />}
       </div>
-      {/* <Route path="/caption/:id" component={CaptionPage} /> */}
     </Router>
   );
 };
