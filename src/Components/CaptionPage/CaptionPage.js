@@ -1,73 +1,55 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import { FacebookShareButton, TwitterShareButton } from 'react-share'; // Import share buttons
+import { FacebookIcon, TwitterIcon } from 'react-share'; // Import share icons
 import './customStyles.css';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column', // Align items in a column
-  },
-  image: {
-    marginRight: '20px', // Adjust the spacing between the image and inputs
-  },
-  inputContainer: {
-    display: 'flex',
-    flexDirection: 'column', // Align input boxes in a column
-    marginLeft: '20px', // Add margin for better separation from the image
-  },
-  buttonContainer: {
-    display: 'flex',
-    flexDirection: 'row', // Align buttons in a row
-    marginTop: '20px', // Add margin between input boxes and buttons
-  },
-  buttonStyle:{
-    marginRight:'10px',
-    borderRadius: '5px',
-  }
-};
+// Set the app element for React Modal
+Modal.setAppElement('#root');
 
 const CaptionPage = ({ meme, setMeme, closeModal }) => {
   const [inputText, setInputText] = useState(Array(meme.box_count).fill(''));
-  
+  const [errorMessage, setErrorMessage] = useState('');
+  const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+
   const generateMeme = async () => {
     const templateId = meme.id;
-    const username = 'tejashwa'; // Replace with your Imgflip username
-    const password = 'WhatAMeme@123'; // Replace with your Imgflip password
+    const username = 'tejashwa'; 
+    const password = 'WhatAMeme@123';
+
+    // Check if any text is provided
+    if (!inputText.some(text => text.trim() !== '')) {
+      console.error('Error generating meme: No texts specified.');
+      setErrorMessage('No texts specified.');
+      return;
+    }
+    setErrorMessage('');
 
     let url = `https://api.imgflip.com/caption_image?template_id=${templateId}&username=${username}&password=${password}`;
-  
-  // Construct the URL for each text box
-  inputText.forEach((text, index) => {
-    url += `&boxes[${index}][text]=${encodeURIComponent(text)}`;
-  });
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST'
+    // Construct the URL for each text box
+    inputText.forEach((text, index) => {
+      url += `&boxes[${index}][text]=${encodeURIComponent(text)}`;
     });
 
-    const data = await response.json();
+    try {
+      const response = await fetch(url, {
+        method: 'POST'
+      });
 
-    if (data.success) {
-      console.log('Meme generated successfully:', data.data.url);
-      setMeme({ ...meme, url: data.data.url }); // Update the default image with the generated one
-    } else {
-      console.error('Error generating meme:', data.error_message);
-      // Handle error response
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Meme generated successfully:', data.data.url);
+        setGeneratedImageUrl(data.data.url); // Update the generated image URL
+        setMeme({ ...meme, url: data.data.url });
+      } else {
+        console.error('Error generating meme:', data.error_message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  } catch (error) {
-    console.error('Error:', error);
-    // Handle network or other errors
-  }
-  }
+  };
 
   const handleInputChange = (index, value) => {
     const newText = [...inputText];
@@ -93,7 +75,7 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
 
     const link = document.createElement('a');
     link.href = imageUrl;
-    link.download = 'generated_meme.png'; // You can adjust the filename here
+    link.download = `${meme.name}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -103,24 +85,34 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
     <Modal
       isOpen={true}
       onRequestClose={closeModal}
-      style={customStyles}
+      className="content"
       contentLabel="Meme Modal"
     >
       {/* Your modal content */}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={customStyles.image}>
+      <div className="modal-container">
+        <div>
           <h2>{meme.name}</h2>
-          <img src={meme.url} alt={meme.name} style={{ width: '200px', height: 'auto' }} />
+          {/* Use the generated image URL if available, otherwise use the original meme URL */}
+          <img src={generatedImageUrl || meme.url} alt={meme.name} style={{ width: '200px', height: 'auto' }} />
         </div>
-        <div style={customStyles.inputContainer}>
+        <div>
           {inputBoxes}
         </div>
       </div>
-      <div style={customStyles.buttonContainer}>
-        <button style={customStyles.buttonStyle} onClick={generateMeme}>Generate Meme</button>
-        <button style={customStyles.buttonStyle} onClick={downloadImage}>Download Meme</button>
-        <button onClick={closeModal}>Close</button>
+      <div className='buttonContainer'>
+        <button className="buttonStyle" onClick={generateMeme}>Generate Meme</button>
+        <button className="buttonStyle" onClick={downloadImage}>Download Meme</button>
+        {/* Share buttons */}
+        <FacebookShareButton className="buttonStyle" url={generatedImageUrl || meme.url}>
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <TwitterShareButton className="buttonStyle" url={generatedImageUrl || meme.url}>
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+        {/* Close button */}
+        <button className="buttonStyle" onClick={closeModal}>Close</button>
       </div>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </Modal>
   );
 };

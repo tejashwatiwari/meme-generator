@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MemeCard from "./MemeCard/MemeCard";
 import CaptionPage from './CaptionPage/CaptionPage';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+// import './Pagination.css';
 
 const Body = () => {
   const [memes, setMemes] = useState([]);
   const [selectedMeme, setSelectedMeme] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const memesPerPage = 20;
 
   useEffect(() => {
     const fetchMemes = async () => {
@@ -24,16 +27,50 @@ const Body = () => {
     fetchMemes();
   }, []);
 
+  // Logic to calculate the index of the first and last meme on the current page
+  const indexOfLastMeme = currentPage * memesPerPage;
+  const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
+  const currentMemes = memes.slice(indexOfFirstMeme, indexOfLastMeme);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <Router>
       <div className="body">
         <h1>Pick Your Meme Template</h1>
         <div className="memes-container">
-          {memes.map((meme) => (
-            <MemeCard key={meme.id} meme={meme} onSelectMeme={setSelectedMeme} />
+          {currentMemes.map((meme) => (
+            <MemeCard key={meme.id} meme={meme} onSelectMeme={() => setSelectedMeme(meme)} />
           ))}
         </div>
-        {selectedMeme && <CaptionPage meme={selectedMeme} setMeme={setSelectedMeme} />}
+        <div className="pagination">
+          <button
+            className="pagination-link"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          {Array.from({ length: Math.ceil(memes.length / memesPerPage) }, (_, i) => (
+            <Link
+              to="#"
+              key={i + 1}
+              className={i + 1 === currentPage ? "pagination-link active" : "pagination-link"}
+              onClick={() => paginate(i + 1)}
+            >
+              {i + 1}
+            </Link>
+          ))}
+          <button
+            className="pagination-link"
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === Math.ceil(memes.length / memesPerPage)}
+          >
+            Next
+          </button>
+        </div>
+        {/* {selectedMeme && <CaptionPage meme={selectedMeme} setMeme={setSelectedMeme} closeModal={() => setSelectedMeme(null)} />} */}
       </div>
     </Router>
   );

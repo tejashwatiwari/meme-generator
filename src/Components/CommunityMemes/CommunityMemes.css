@@ -1,6 +1,6 @@
 /* CommunityMemes.css */
 .community-meme {
-    width: 350px;
+    width: 250px;
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -29,3 +29,27 @@
     background-color: white;
   }
   
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-weight: bold;
+  }

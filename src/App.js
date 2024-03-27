@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route path="/" exact component={Body} /> {/* Homepage */}
-        <Route path="/community-memes" component={CommunityMemes} /> {/* Community Memes page */}
+        <Route path="/" exact component={Body} />
+        <Route path="/memes" component={CommunityMemes} /> 
       </Switch>
     </div>
   </Router>

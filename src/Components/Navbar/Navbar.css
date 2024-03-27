@@ -1,37 +1,51 @@
 /* Header styles */
 .header {
-    background-color: #333; 
-    position: sticky;
-    width:100%;
-    top: 0; 
-    z-index: 1000; /* Ensure the header is above other content */
-    transition: all 0.3s ease; /* Smooth transition for changes */
-  }
-  
-  /* Navigation bar styles */
-  .navbar {
-    padding: 15px;
-    text-align: center; /* Center align the content within the navbar */
-    transition: all 0.3s ease; /* Smooth transition for changes */
-  
-  }
-  
-  /* Smaller navbar and shifted logo when scrolled */
-  .navbar.scrolled {
-    padding: 10px; /* Adjusted padding for smaller navbar */
-  }
-  
-  .navbar-logo {
-    display: inline-block;
-    max-width: 250px; /* Adjust the maximum width of the logo as needed */
-    height: auto;
-    vertical-align: middle;
-    transition: all 0.3s ease; /* Smooth transition for changes */
-  }
-  
-  .navbar-logo.scrolled {
-    max-width: 150px; /* Adjusted max-width for smaller logo */
-    margin-left: 20px; /* Shift the logo to the left */
-  }
-  
-  
+  background-color: #333; 
+  position: sticky;
+  width: 100%;
+  top: 0; 
+  z-index: 1000; /* Ensure the header is above other content */
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+
+/* Navigation bar styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute items evenly along the main axis */
+  padding: 15px;
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+
+/* Smaller navbar and shifted logo when scrolled */
+.navbar.scrolled {
+  padding: 10px; /* Adjusted padding for smaller navbar */
+}
+
+.navbar-logo {
+  max-width: 250px; /* Adjust the maximum width of the logo as needed */
+  height: auto;
+  flex-shrink: 0; /* Prevent logo from shrinking */
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+
+.navbar-logo.scrolled {
+  max-width: 150px; /* Adjusted max-width for smaller logo */
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link {
+  margin-left: 20px; /* Add spacing between links */
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+
+.navbar-link:hover {
+  color: #ff4500; /* Change color on hover */
+}
