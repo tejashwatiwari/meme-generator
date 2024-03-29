@@ -7,6 +7,40 @@ import './customStyles.css';
 // Set the app element for React Modal
 Modal.setAppElement('#root');
 
+// Define custom styles
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    backgroundColor: '#f0f0f0',
+    // marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column', // Align items in a column
+  },
+  image: {
+    marginRight: '20px', // Adjust the spacing between the image and inputs
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'column', // Align input boxes in a column
+    marginLeft: '20px', // Add margin for better separation from the image
+  },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'column', // Align buttons in a row
+    marginTop: '20px', // Add margin between input boxes and buttons
+  },
+  buttonStyle: {
+    marginRight: '10px',
+    borderRadius: '5px',
+  }
+};
+
 const CaptionPage = ({ meme, setMeme, closeModal }) => {
   const [inputText, setInputText] = useState(Array(meme.box_count).fill(''));
   const [errorMessage, setErrorMessage] = useState('');
@@ -85,34 +119,33 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
     <Modal
       isOpen={true}
       onRequestClose={closeModal}
-      className="content"
+      style={customStyles}
+      portalClassName="custom-content"
       contentLabel="Meme Modal"
     >
-      {/* Your modal content */}
-      <div className="modal-container">
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+
+        <div style={customStyles.image}>
           <h2>{meme.name}</h2>
           {/* Use the generated image URL if available, otherwise use the original meme URL */}
-          <img src={generatedImageUrl || meme.url} alt={meme.name} style={{ width: '200px', height: 'auto' }} />
-        </div>
-        <div>
+          <img className="meme-img" src={generatedImageUrl || meme.url} alt={meme.name} style={{ width: '200px', height: 'auto' }} />
+        <div style={customStyles.inputContainer}>
           {inputBoxes}
         </div>
       </div>
-      <div className='buttonContainer'>
-        <button className="buttonStyle" onClick={generateMeme}>Generate Meme</button>
-        <button className="buttonStyle" onClick={downloadImage}>Download Meme</button>
-        {/* Share buttons */}
-        <FacebookShareButton className="buttonStyle" url={generatedImageUrl || meme.url}>
+      <div style={customStyles.buttonContainer}>
+        <button style={customStyles.buttonStyle} onClick={generateMeme}>Generate Meme</button>
+        <button style={customStyles.buttonStyle} onClick={downloadImage}>Download Meme</button>
+        <FacebookShareButton className="shareButtonStyle" url={generatedImageUrl || meme.url}>
           <FacebookIcon size={32} round />
         </FacebookShareButton>
-        <TwitterShareButton className="buttonStyle" url={generatedImageUrl || meme.url}>
+        <TwitterShareButton className="shareButtonStyle" url={generatedImageUrl || meme.url}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
-        {/* Close button */}
         <button className="buttonStyle" onClick={closeModal}>Close</button>
       </div>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            </div>
     </Modal>
   );
 };

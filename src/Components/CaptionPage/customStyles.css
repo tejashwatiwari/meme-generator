@@ -1,64 +1,6 @@
-.content {
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; /* Align elements from left to right */
-  align-items: center; /* Center align items vertically */
-  margin: 10% auto; /* Center the modal vertically and horizontally */
-  border: 1px solid black;
-  width: 800px; /* Set your desired width */
-  height: 400px; /* Set your desired height */
-  background-color: white; /* Optional: Set a background color */
-  padding: 20px; /* Optional: Add padding */
-  margin-left: 30%  ;
-}
 
-.modal-container {
-  display: flex;
-  flex-direction: row;
-  margin-top:30px;
-  align-items: flex-start; /* Align items to the left */
-}
-
-.modal-container.img {
-  flex-direction: column;
-  margin-top:30px;
-  align-items: flex-start; /* Align items to the left */
-}
-
-.modal-image {
-  align-self: flex-end; /* Align image to the right */
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center align items horizontally */
-  margin-left: 50%;
-  margin-right: 50%;
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column; /* Align buttons vertically */
-  align-items: flex-end; /* Align buttons to the right */
-  margin-top: 20px;
-}
-
-.buttonStyle {
-  margin-top: 5px;
-  border-radius: 5px;
-  align-items: center;
-}
-
-.error-message {
-  color: red;
-}
-
-.close-button {
-  margin-right: 10px;
-}
-
-.buttonStyle {
-  margin-right: 10px;
+.content h1 {
+  text-align: center;
+  justify-content: center;
+  margin: 10px;
 }
