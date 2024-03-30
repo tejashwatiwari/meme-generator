@@ -5,8 +5,8 @@ import './CommunityMemes.css';
 const CommunityMemes = () => {
   const [memes, setMemes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentCategory, setCurrentCategory] = useState('memes'); // Default category
-  const [after, setAfter] = useState(''); // Store the after value for pagination
+  const [currentCategory, setCurrentCategory] = useState('memes'); 
+  const [after, setAfter] = useState(''); 
 
   const memesPerPage = 16;
 
@@ -17,18 +17,19 @@ const CommunityMemes = () => {
     { name: 'Anime Memes', subreddit: 'Animemes' },
     { name: 'Relationship Memes', subreddit: 'RelationshipMemes' },
     { name: 'Gym Memes', subreddit: 'GymMemes' }
+    
   ];
 
   useEffect(() => {
     fetchMemes();
-  }, [currentPage, currentCategory]); // Trigger fetch on category or page change
+  }, [currentPage, currentCategory]); 
 
   const fetchMemes = async () => {
     try {
       const response = await axios.get(`http://localhost:5001/api/memes/${currentCategory}`, {
         params: { after: after || '' }
       });
-      const { memes: fetchedMemes, after: newAfter } = response.data; // Extract memes and after value from response
+      const { memes: fetchedMemes, after: newAfter } = response.data; 
       setMemes(fetchedMemes);
       setAfter(newAfter);
     } catch (error) {
@@ -38,8 +39,8 @@ const CommunityMemes = () => {
 
   const handleCategoryChange = (category) => {
     setCurrentCategory(category);
-    setCurrentPage(1); // Reset page when category changes
-    setAfter(''); // Reset the after value when category changes
+    setCurrentPage(1); 
+    setAfter(''); 
   };
 
   const handleNextPage = () => {
@@ -55,7 +56,6 @@ const CommunityMemes = () => {
   return (
     <div>
       <h1>Community Memes</h1>
-      {/* Category buttons */}
       <div className="category-buttons">
         {categories.map((category, index) => (
           <button key={index} onClick={() => handleCategoryChange(category.subreddit)}>

@@ -3,6 +3,7 @@ import Body from './Components/Body';
 import Navbar from './Components/Navbar/Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CommunityMemes from './Components/CommunityMemes/CommunityMemes';
+import Footer from './Components/Footer/footer';
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
         <Route path="/memes" component={CommunityMemes} /> 
       </Switch>
     </div>
+    <Footer />
   </Router>
+
+
   );
 }
 

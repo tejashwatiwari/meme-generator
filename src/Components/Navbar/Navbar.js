@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import AboutMeModal from '../../AboutMe/AboutMeModal';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [aboutMeModalIsOpen, setAboutMeModalIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
+  const openAboutMeModal = () => {
+    setAboutMeModalIsOpen(true);
+  };
 
-    window.addEventListener('scroll', handleScroll);
+  const closeAboutMeModal = () => {
+    setAboutMeModalIsOpen(false);
+  };
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const handleScroll = () => {
+    const isScrolled = window.scrollY > 0;
+    setScrolled(isScrolled);
+  };
+
+  window.addEventListener('scroll', handleScroll);
 
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
@@ -29,14 +33,16 @@ const Navbar = () => {
           />
         </Link>
         <div className="navbar-links">
-          <Link to="/" className={`navbar-link ${scrolled ? 'scrolled' : ''}`}>
+          <Link to="/" className={`navbar-link home ${scrolled ? 'scrolled' : ''}`}>
             Home
           </Link>
-          <Link to="/memes" className={`navbar-link ${scrolled ? 'scrolled' : ''}`}>
+          <Link to="/memes" className={`navbar-link community-memes ${scrolled ? 'scrolled' : ''}`}>
             Community Memes
           </Link>
+          <button className="about-me-button" onClick={openAboutMeModal}>About Me</button>
         </div>
       </nav>
+      <AboutMeModal isOpen={aboutMeModalIsOpen} closeModal={closeAboutMeModal} />
     </header>
   );
 };

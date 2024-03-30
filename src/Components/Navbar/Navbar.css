@@ -1,36 +1,35 @@
-/* Header styles */
+/* Navbar.css */
+
 .header {
-  background-color: #333; 
+  background-color: #333;
   position: sticky;
   width: 100%;
-  top: 0; 
-  z-index: 1000; /* Ensure the header is above other content */
-  transition: all 0.3s ease; /* Smooth transition for changes */
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
-/* Navigation bar styles */
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribute items evenly along the main axis */
+  justify-content: space-between;
   padding: 15px;
-  transition: all 0.3s ease; /* Smooth transition for changes */
+  transition: all 0.3s ease;
 }
 
-/* Smaller navbar and shifted logo when scrolled */
 .navbar.scrolled {
-  padding: 10px; /* Adjusted padding for smaller navbar */
+  padding: 10px;
 }
 
 .navbar-logo {
-  max-width: 250px; /* Adjust the maximum width of the logo as needed */
+  max-width: 250px;
   height: auto;
-  flex-shrink: 0; /* Prevent logo from shrinking */
-  transition: all 0.3s ease; /* Smooth transition for changes */
+  flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
 .navbar-logo.scrolled {
-  max-width: 150px; /* Adjusted max-width for smaller logo */
+  max-width: 150px;
 }
 
 .navbar-links {
@@ -39,13 +38,29 @@
 }
 
 .navbar-link {
-  margin-left: 20px; /* Add spacing between links */
+  margin-left: 20px;
   color: white;
   text-decoration: none;
   font-size: 20px;
-  transition: all 0.3s ease; /* Smooth transition for changes */
+  transition: all 0.3s ease;
 }
 
 .navbar-link:hover {
-  color: #ff4500; /* Change color on hover */
+  color: red;
+}
+
+/* Style for the "About Me" button */
+.about-me-button {
+  color: white;
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.about-me-button:hover {
+  color: red;
 }

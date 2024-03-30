@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { FacebookShareButton, TwitterShareButton } from 'react-share'; // Import share buttons
-import { FacebookIcon, TwitterIcon } from 'react-share'; // Import share icons
-import './customStyles.css';
+import { FacebookShareButton, TwitterShareButton } from 'react-share'; 
+import { FacebookIcon, TwitterIcon } from 'react-share'; 
+import './customStyles.css'; 
 
-// Set the app element for React Modal
 Modal.setAppElement('#root');
 
-// Define custom styles
 const customStyles = {
   content: {
     top: '50%',
@@ -15,29 +13,49 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     backgroundColor: '#f0f0f0',
-    // marginRight: '-50%',
+    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column', // Align items in a column
+    textAlign: 'center',
+    flexDirection: 'column',
   },
-  image: {
-    marginRight: '20px', // Adjust the spacing between the image and inputs
+  inputStyle: {
+    borderRadius: '5px',
+    border: '1px solid #ced4da', 
+    padding: '8px 12px',
+    marginBottom: '10px',
+    width: '100%',
+    boxSizing: 'border-box', 
+  },
+  row: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '10px',
+    // margin: '5px',
   },
   inputContainer: {
     display: 'flex',
-    flexDirection: 'column', // Align input boxes in a column
-    marginLeft: '20px', // Add margin for better separation from the image
+    flexDirection: 'column', 
+    alignItems: 'center',
+    margin: '5px',
   },
   buttonContainer: {
     display: 'flex',
-    flexDirection: 'column', // Align buttons in a row
-    marginTop: '20px', // Add margin between input boxes and buttons
+    marginRight:'5px',
+    marginBottom: '10px',
+    justifyContent: 'center',
+    marginTop: '20px', 
+    hover: {backgroundColor: '#004080'},
   },
   buttonStyle: {
-    marginRight: '10px',
     borderRadius: '5px',
+    backgroundColor: '#0056b3', 
+    color: '#fff', 
+    padding: '8px 16px',
+    border: 'none', 
+    cursor: 'pointer', 
+    margin: '5px',
   }
 };
 
@@ -47,26 +65,26 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
   const [generatedImageUrl, setGeneratedImageUrl] = useState('');
 
   const generateMeme = async () => {
-    const templateId = meme.id;
-    const username = 'tejashwa'; 
-    const password = 'WhatAMeme@123';
-
-    // Check if any text is provided
-    if (!inputText.some(text => text.trim() !== '')) {
-      console.error('Error generating meme: No texts specified.');
-      setErrorMessage('No texts specified.');
-      return;
-    }
-    setErrorMessage('');
-
-    let url = `https://api.imgflip.com/caption_image?template_id=${templateId}&username=${username}&password=${password}`;
-
-    // Construct the URL for each text box
-    inputText.forEach((text, index) => {
-      url += `&boxes[${index}][text]=${encodeURIComponent(text)}`;
-    });
-
     try {
+      const templateId = meme.id;
+      const username = 'tejashwa'; 
+      const password = 'WhatAMeme@123';
+
+      // Check if any text is provided
+      if (!inputText.some(text => text.trim() !== '')) {
+        console.error('Error generating meme: No texts specified.');
+        setErrorMessage('No texts specified.');
+        return;
+      }
+      setErrorMessage('');
+
+      let url = `https://api.imgflip.com/caption_image?template_id=${templateId}&username=${username}&password=${password}`;
+
+      // Construct the URL for each text box
+      inputText.forEach((text, index) => {
+        url += `&boxes[${index}][text]=${encodeURIComponent(text)}`;
+      });
+
       const response = await fetch(url, {
         method: 'POST'
       });
@@ -79,9 +97,11 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
         setMeme({ ...meme, url: data.data.url });
       } else {
         console.error('Error generating meme:', data.error_message);
+        setErrorMessage(data.error_message);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error generating meme:', error);
+      setErrorMessage('Error generating meme. Please try again.');
     }
   };
 
@@ -95,24 +115,28 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
     <input
       key={index}
       type="text"
+      style={customStyles.inputStyle}
       placeholder={`Text ${index + 1}`}
-      style={{ marginBottom: '10px' }}
       value={text}
       onChange={(e) => handleInputChange(index, e.target.value)}
     />
   ));
-
   const downloadImage = async () => {
-    const image = await fetch(meme.url);
-    const imageBlob = await image.blob();
-    const imageUrl = URL.createObjectURL(imageBlob);
-
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `${meme.name}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      const imageResponse = await fetch(generatedImageUrl || meme.url); 
+      const imageBlob = await imageResponse.blob();
+      const imageUrl = URL.createObjectURL(imageBlob);
+  
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = `${meme.name}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading image:', error);
+      setErrorMessage('Error downloading image. Please try again.');
+    }
   };
 
   return (
@@ -123,14 +147,15 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
       portalClassName="custom-content"
       contentLabel="Meme Modal"
     >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-
-        <div style={customStyles.image}>
-          <h2>{meme.name}</h2>
-          {/* Use the generated image URL if available, otherwise use the original meme URL */}
+      <h2>{meme.name}</h2>
+      <div style={customStyles.row}>
+        <div>
           <img className="meme-img" src={generatedImageUrl || meme.url} alt={meme.name} style={{ width: '200px', height: 'auto' }} />
+        </div>
         <div style={customStyles.inputContainer}>
+          <h4>Enter Caption Below</h4>
           {inputBoxes}
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </div>
       </div>
       <div style={customStyles.buttonContainer}>
@@ -144,8 +169,6 @@ const CaptionPage = ({ meme, setMeme, closeModal }) => {
         </TwitterShareButton>
         <button className="buttonStyle" onClick={closeModal}>Close</button>
       </div>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            </div>
     </Modal>
   );
 };

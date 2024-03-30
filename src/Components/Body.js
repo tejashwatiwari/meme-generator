@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MemeCard from "./MemeCard/MemeCard";
-import CaptionPage from './CaptionPage/CaptionPage';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-// import './Pagination.css';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 
 const Body = () => {
   const [memes, setMemes] = useState([]);
@@ -27,12 +26,10 @@ const Body = () => {
     fetchMemes();
   }, []);
 
-  // Logic to calculate the index of the first and last meme on the current page
   const indexOfLastMeme = currentPage * memesPerPage;
   const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
   const currentMemes = memes.slice(indexOfFirstMeme, indexOfLastMeme);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -69,6 +66,7 @@ const Body = () => {
           >
             Next
           </button>
+          <ScrollToTop buttonColor="#ff4500"  />
         </div>
         {/* {selectedMeme && <CaptionPage meme={selectedMeme} setMeme={setSelectedMeme} closeModal={() => setSelectedMeme(null)} />} */}
       </div>

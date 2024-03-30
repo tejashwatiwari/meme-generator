@@ -1,55 +1,84 @@
-/* CommunityMemes.css */
-.community-meme {
-    width: 250px;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; /* Adding transition for smooth hover effect */
-  }
-  
-  .community-meme:hover {
-    transform: translateY(-5px); /* Move the card up by 5px on hover */
-  }
-  
-  .community-meme img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .memes-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-  }
-  
-  /* Set black background for the Community Page */
-  body {
-    background-color: white;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination button {
-    margin: 0 10px;
-    padding: 5px 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .pagination button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .pagination span {
-    font-weight: bold;
-  }
+.community-meme {  
+  width: 100%;
+  max-width: 300px;
+  object-fit: contain;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 2px dashed;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.community-meme:hover {
+  transform: translateY(-5px);
+}
+
+.community-meme img {
+  max-width: 100%;
+  height: auto;
+}
+
+.memes-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-buttons button:hover {
+  background-color: #555;
+}
+
+.pagination {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  margin: 0 20px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scroll-default{
+  color: white;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 5px;
+}

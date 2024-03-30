@@ -7,7 +7,7 @@ const MemeCard = ({ meme, onSelectMeme }) => {
 
   const openModal = () => {
     setIsOpen(true);
-    onSelectMeme(meme); // Pass the selected meme to the parent component
+    onSelectMeme(meme);
   };
 
   const closeModal = () => {
