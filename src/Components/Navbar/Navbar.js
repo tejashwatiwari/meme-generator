@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import AboutMeModal from '../../AboutMe/AboutMeModal';
+import AboutMeModal from '../AboutMe/AboutMeModal.js';
+
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
