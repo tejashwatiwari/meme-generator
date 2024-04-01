@@ -26,8 +26,7 @@ const RandomMeme = () => {
 
   const shareOrDownload = () => {
     if (meme) {
-      // Implement your share/download logic here
-      // For example, you can open the image in a new tab
+        //Skipping this feature for now. Will think about something later.
       window.open(meme.url);
     }
   };

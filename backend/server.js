@@ -4,9 +4,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
 
+// Route for fetching memes
 app.get('/api/memes/:category', async (req, res) => {
   const { category } = req.params;
   const { after } = req.query;
@@ -25,6 +27,17 @@ app.get('/api/memes/:category', async (req, res) => {
   } catch (error) {
     console.error(`Error fetching ${category} memes from Reddit:`, error);
     res.status(500).json({ error: `Failed to fetch ${category} memes` });
+  }
+});
+
+// Route for generating AI meme
+app.post('/api/proxy/ai_meme', async (req, res) => {
+  try {
+    const response = await axios.post('https://api.imgflip.com/ai_meme', req.body);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error generating AI meme:', error);
+    res.status(500).json({ error: 'Failed to generate AI meme' });
   }
 });
 

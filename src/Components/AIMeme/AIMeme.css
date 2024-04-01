@@ -1,0 +1,32 @@
+/* AIMeme.css */
+
+.ai-meme-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .meme-wrapper {
+    display: inline-block;
+    border: 3px solid #333;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .meme-image {
+    max-width: 100%;
+  }
+  
+  .ai-meme-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .ai-meme-container button:hover {
+    background-color: #0056b3;
+  }
+  

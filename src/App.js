@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CommunityMemes from './Components/CommunityMemes/CommunityMemes';
 import Footer from './Components/Footer/footer';
 import RandomMeme from './Components/RandomMeme/RandomMeme';
+import AIMeme from './Components/AIMeme/AIMeme';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact component={Body} />
         <Route path="/memes" component={CommunityMemes} /> 
         <Route path="/random-meme" component={RandomMeme} />
+        <Route path="/ai-meme" component={AIMeme} />
       </Switch>
     </div>
     <Footer />
