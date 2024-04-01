@@ -64,3 +64,13 @@
 .about-me-button:hover {
   color: red;
 }
+
+/* Additional styling for navigation links */
+.navbar-link:not(:last-child) {
+  border-right: 1px solid white; /* Add border between navigation links */
+  padding-right: 20px; /* Add some spacing between links */
+}
+
+.navbar-link:first-child {
+  margin-left: 0; /* Remove margin from the first link */
+}
