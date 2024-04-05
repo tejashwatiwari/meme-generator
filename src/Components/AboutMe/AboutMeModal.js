@@ -13,9 +13,7 @@ const AboutMeModal = ({ isOpen, closeModal }) => {
       <div className="about-me-content">
         <img src="/images/about.png" alt="Tejashwa Tiwari" className="profile-pic" />
         <p>
-          I am a student at California State University, Fullerton, and currently working on this project.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget lectus fermentum, fermentum risus id, vehicula metus.
-          Donec ultrices viverra est id semper. Quisque et libero nec nunc ultricies congue.
+        Hey there! I'm a CSUF Masters student passionate about coding and entrepreneurship. Coding is my form of expression, crafting algorithms and building software solutions. I thrive on turning ideas into reality. Entrepreneurship excites me - I love bringing transformative concepts to life and navigating business complexities. Beyond coding, I explore new technologies, devour innovation books, and engage in thought-provoking conversations. Let's innovate, create, and inspire together!
         </p>
         <button onClick={closeModal} className="close-button">Close</button>
       </div>
