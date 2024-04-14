@@ -6,6 +6,8 @@ import CommunityMemes from './Components/CommunityMemes/CommunityMemes';
 import Footer from './Components/Footer/footer';
 import RandomMeme from './Components/RandomMeme/RandomMeme';
 import AIMeme from './Components/AIMeme/AIMeme';
+import WorkshopCourses from './Components/WorkshopCourses/WorkshopCourses';
+import Automeme from './Components/AutoMeme/automeme';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/memes" component={CommunityMemes} /> 
         <Route path="/random-meme" component={RandomMeme} />
         <Route path="/ai-meme" component={AIMeme} />
+        <Route path="/workshop" component={WorkshopCourses} />
+        <Route path="/automeme" component={Automeme} />
       </Switch>
     </div>
     <Footer />

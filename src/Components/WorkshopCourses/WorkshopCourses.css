@@ -1,0 +1,67 @@
+.workshop-courses {
+    padding: 20px;
+  }
+  
+  .course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .course-card {
+    position: relative; /* Ensure relative positioning for absolute positioning inside */
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height:450px
+  }
+  
+  .course-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .course-card img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .course-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .course-details {
+    padding: 20px;
+  }
+  
+  .course-details h3 {
+    margin-top: 0;
+  }
+  
+  .course-details p {
+    margin-bottom: 0;
+  }
+  
+  .course-details a {
+    position: absolute; /* Position the button absolutely */
+    bottom: 10px; /* Adjust the bottom distance as needed */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Center the button horizontally */
+    display: inline-block;
+    text-align: center;
+    padding: 8px 16px;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .course-details a:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  

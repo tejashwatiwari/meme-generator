@@ -1,32 +1,58 @@
-/* AIMeme.css */
-
 .ai-meme-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .meme-wrapper {
-    display: inline-block;
-    border: 3px solid #333;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .meme-image {
-    max-width: 100%;
-  }
-  
-  .ai-meme-container button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .ai-meme-container button:hover {
-    background-color: #0056b3;
-  }
-  
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.meme-carousel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+
+.meme-carousel img {
+  width: auto;
+  max-width: 300px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.meme-carousel img:hover {
+  transform: scale(1.1);
+}
+
+.selected {
+  border: 3px solid #007bff; /* Highlight selected meme */
+}
+
+.selected-meme {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.selected-meme h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.selected-meme button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.selected-meme button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
