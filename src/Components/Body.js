@@ -35,7 +35,7 @@ const Body = () => {
   return (
     <Router>
       <div className="body">
-        <h1>Pick Your Meme Template</h1>
+        <h1>Pick Your Meme Template 🤪 </h1>
         <div className="memes-container">
           {currentMemes.map((meme) => (
             <MemeCard key={meme.id} meme={meme} onSelectMeme={() => setSelectedMeme(meme)} />

@@ -55,7 +55,7 @@ const CommunityMemes = () => {
 
   return (
     <div>
-      <h1>Community Memes</h1>
+      <h1>Community Memes 🤣</h1>
       <div className="category-buttons">
         {categories.map((category, index) => (
           <button key={index} onClick={() => handleCategoryChange(category.subreddit)}>

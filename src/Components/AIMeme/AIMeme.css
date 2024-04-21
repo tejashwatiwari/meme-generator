@@ -1,58 +1,100 @@
-.ai-meme-container {
-  max-width: 1400px;
-  margin: 0 auto;
+/* ImgflipMemeGenerator.css */
+
+.meme-generator {
+  text-align: center;
   padding: 20px;
 }
 
-.meme-carousel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
-}
-
-.meme-carousel img {
-  width: auto;
-  max-width: 300px;
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.meme-carousel img:hover {
-  transform: scale(1.1);
-}
-
-.selected {
-  border: 3px solid #007bff; /* Highlight selected meme */
-}
-
-.selected-meme {
+.loading-message {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-spinner {
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: #007bff; /* Loading spinner color */
+}
+
+.loading-text {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.joke-text {
+  font-style: italic;
+  color: #666; /* Joke text color */
+}
+
+.generated-meme-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.generated-meme {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+  margin-right: 20px;
+  display: block; /* Ensure image is displayed as block */
+}
+
+.meme-details {
+  text-align: left;
+}
+
+.meme-text {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
   text-align: center;
 }
 
-.selected-meme h2 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
+.form-select-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 20px; /* Center the dropdown box */
+  position: relative;
 }
 
-.selected-meme button {
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #007bff;
-  color: white;
-  border: none;
+.form-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  appearance: none;
+  background-color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.selected-meme button:hover {
+.form-select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.btn {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn:hover {
   background-color: #0056b3;
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
+.joke-text {
+  font-style: italic;
+  color: #666; /* Joke text color */
+  font-size: 30px; /* Adjust the font size as needed */
 }

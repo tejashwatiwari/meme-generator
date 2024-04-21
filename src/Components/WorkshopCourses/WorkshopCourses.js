@@ -32,7 +32,7 @@ const WorkshopCourses = () => {
 
   return (
     <div className="workshop-courses">
-      <h2>Workshop Courses</h2>
+      <h1>Workshop Courses 🙇🏼‍♂️</h1>
       <div className="course-list">
         {courses.map((course) => (
           <div key={course.id} className="course-card">

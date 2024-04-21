@@ -33,6 +33,7 @@ const RandomMeme = () => {
 
   return (
     <div className="random-meme-container">
+      <h1>Random Meme Generator 😜</h1>
       {meme && (
         <div className="meme-wrapper">
           <img src={meme.url} alt={meme.title} className="meme-image" />
