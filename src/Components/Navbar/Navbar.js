@@ -45,6 +45,9 @@ const Navbar = () => {
           </Link>
           <Link to="random-meme" className={`navbar-link random-meme-generator ${scrolled ? 'scrolled': ''}`}>Random Meme</Link>
           <Link to="ai-meme" className={`navbar-link ai-meme ${scrolled ? 'scrolled': ''}`}>AI Meme</Link> 
+          <Link to="/automeme" className={`navbar-link workshop ${scrolled ? 'scrolled' : ''}`}>
+            AutoMeme
+          </Link>
           <button className="about-me-button" onClick={openAboutMeModal}>About Me</button>
         </div>
       </nav>
